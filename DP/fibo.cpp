@@ -1,27 +1,19 @@
-int fibonacci(int n, unordered_map<int, int> &map)
+#include <bits/stdc++.h>
+using namespace std;
+
+int fib(int n, vector<int> &dp)
 {
-    if (n == 0 || n == 1)
-    {
-        map[n] = n;
+    if (n <= 1)
         return n;
-    }
-    int prev;
-    int nextPrev;
-    if (map[n - 1])
-    {
-        prev = map[n - 1];
-    }
-    else
-        prev = fibonacci(n - 1, map);
-    if (map[n - 2])
-        nextPrev = map[n - 2];
-    else
-        nextPrev = fibonacci(n - 2, map);
-    return prev + nextPrev;
+    if (dp[n] != -1)
+        return dp[n];
+
+    return dp[n] = fib(n - 1, dp) + fib(n - 2, dp);
 }
 
-int fib(int n)
+int main()
 {
-    unordered_map<int, int> map;
-    return fibonacci(n, map);
+    int n = 5;
+    vector<int> dp(n + 1, -1);
+    cout << fib(n, dp);
 }
